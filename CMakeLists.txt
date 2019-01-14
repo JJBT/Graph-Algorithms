@@ -3,4 +3,4 @@ project(Graphs)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Graphs main.cpp Graphs.h)
+add_executable(Graphs main.cpp Graphs.h Spanning.h)

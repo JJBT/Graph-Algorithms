@@ -8,6 +8,7 @@ struct ver {
     int n;
     struct ver *pi;
     int d;
+    int f;
     int color; // 0 - white, 1 - gray, 2 - black
 
 } typedef Vertex ;
@@ -246,3 +247,52 @@ void Dijkstra(map<int, vector<int>> data, vector<vector<int >> w, int s, int f) 
         cout << item2->n << endl;
     }
 }
+
+
+int time;
+
+
+void DFS_visit(vector<struct ver> &arr, map<int, vector<int>> data,  Vertex* u) {
+    time = time + 1;
+    u->d = time;
+    u->color = 1;
+
+    for (auto& item: data[u->n]) {
+        Vertex *v = &arr[item];
+
+        if (v->color == 0) {
+            v->pi = u;
+            cout << v->n << endl;
+            DFS_visit(arr, data, v);
+        }
+    }
+    u->color = 2;
+    time = time + 1;
+    u->f = time;
+
+}
+
+
+void DFS(map<int, vector<int>> data) {
+    vector <Vertex> arr;
+
+    for (size_t i = 0; i < data.size(); ++i) {
+        Vertex str;
+        str.n = i;
+        str.color = 0;
+        str.pi = nullptr;
+
+        arr.push_back(str);
+    }
+    time = 0;
+
+
+    for (auto& item: arr){
+        if (item.color == 0) {
+            cout << "Starting DFS" << endl;
+            DFS_visit(arr, data, &item);
+        }
+    }
+}
+
+
